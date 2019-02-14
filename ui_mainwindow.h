@@ -46,6 +46,7 @@ public:
     QAction *actionManual;
     QAction *actionAbout_3DF2D;
     QAction *actionContact_Author;
+    QAction *actionSave_as_xyz_file;
     QWidget *centralWidget;
     QGridLayout *gridLayout_3;
     QTabWidget *tabWidget;
@@ -128,6 +129,8 @@ public:
         actionAbout_3DF2D->setObjectName(QStringLiteral("actionAbout_3DF2D"));
         actionContact_Author = new QAction(MainWindow);
         actionContact_Author->setObjectName(QStringLiteral("actionContact_Author"));
+        actionSave_as_xyz_file = new QAction(MainWindow);
+        actionSave_as_xyz_file->setObjectName(QStringLiteral("actionSave_as_xyz_file"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
@@ -568,6 +571,7 @@ public:
         menuFile->addAction(actionOpen_DICOM_Folder);
         menuFile->addSeparator();
         menuFile->addAction(actionSave);
+        menuFile->addAction(actionSave_as_xyz_file);
         menuFile->addSeparator();
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
@@ -610,7 +614,7 @@ public:
 #endif // QT_NO_SHORTCUT
         actionMarching_Cubes_Settings->setText(QApplication::translate("MainWindow", "Marching Cubes", Q_NULLPTR));
         actionRay_Casting_Settings->setText(QApplication::translate("MainWindow", "Ray Casting", Q_NULLPTR));
-        actionSave->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
+        actionSave->setText(QApplication::translate("MainWindow", "Save image", Q_NULLPTR));
 #ifndef QT_NO_SHORTCUT
         actionSave->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", Q_NULLPTR));
 #endif // QT_NO_SHORTCUT
@@ -618,6 +622,7 @@ public:
         actionManual->setText(QApplication::translate("MainWindow", "Manual", Q_NULLPTR));
         actionAbout_3DF2D->setText(QApplication::translate("MainWindow", "About 3DF2D...", Q_NULLPTR));
         actionContact_Author->setText(QApplication::translate("MainWindow", "Contact Author", Q_NULLPTR));
+        actionSave_as_xyz_file->setText(QApplication::translate("MainWindow", "Save as xyz file", Q_NULLPTR));
         _2D_InformationBox->setTitle(QApplication::translate("MainWindow", "DICOM Informations", Q_NULLPTR));
         _2D_Information_Location->setText(QApplication::translate("MainWindow", "Location", Q_NULLPTR));
         _2D_Information_Location_out->setPlaceholderText(QApplication::translate("MainWindow", "     unknow", Q_NULLPTR));

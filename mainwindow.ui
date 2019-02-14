@@ -1058,6 +1058,7 @@
     <addaction name="actionOpen_DICOM_Folder"/>
     <addaction name="separator"/>
     <addaction name="actionSave"/>
+    <addaction name="actionSave_as_xyz_file"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -1144,7 +1145,7 @@
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>Save</string>
+    <string>Save image</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -1168,6 +1169,11 @@
   <action name="actionContact_Author">
    <property name="text">
     <string>Contact Author</string>
+   </property>
+  </action>
+  <action name="actionSave_as_xyz_file">
+   <property name="text">
+    <string>Save as xyz file</string>
    </property>
   </action>
  </widget>

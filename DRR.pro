@@ -1,7 +1,7 @@
 #-------------------------------------------------
 #
 # Project created by QtCreator 2015-12-23T16:17:44
-#
+# MasterDRR
 #-------------------------------------------------
 
 QT       += core gui
@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     screenshot.cpp \
     raycaster.cpp \
     marchingcubes.cpp \
-    texturemapper.cpp
+    texturemapper.cpp \
+    linefunction.cpp
 
 HEADERS  += mainwindow.h \
     screenshot.h \
     raycaster.h \
     marchingcubes.h \
-    texturemapper.h
+    texturemapper.h \
+    linefunction.h
 
 FORMS    += mainwindow.ui \
     raycaster.ui \
