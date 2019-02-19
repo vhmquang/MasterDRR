@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = DRR
 TEMPLATE = app
 
+DEFINES += MESHLAB_SCALAR=float
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -18,14 +19,17 @@ SOURCES += main.cpp\
     raycaster.cpp \
     marchingcubes.cpp \
     texturemapper.cpp \
-    linefunction.cpp
+    linefunction.cpp \
+    plylib.cpp
 
 HEADERS  += mainwindow.h \
     screenshot.h \
     raycaster.h \
     marchingcubes.h \
     texturemapper.h \
-    linefunction.h
+    linefunction.h \
+    importxyz.h \
+    mesh_type.h
 
 FORMS    += mainwindow.ui \
     raycaster.ui \

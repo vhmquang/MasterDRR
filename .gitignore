@@ -36,3 +36,5 @@
 debug
 release
 VTK
+vcg
+wrap

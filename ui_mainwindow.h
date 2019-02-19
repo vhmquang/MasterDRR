@@ -47,6 +47,7 @@ public:
     QAction *actionAbout_3DF2D;
     QAction *actionContact_Author;
     QAction *actionSave_as_xyz_file;
+    QAction *actionOpen_xyz_File;
     QWidget *centralWidget;
     QGridLayout *gridLayout_3;
     QTabWidget *tabWidget;
@@ -131,6 +132,8 @@ public:
         actionContact_Author->setObjectName(QStringLiteral("actionContact_Author"));
         actionSave_as_xyz_file = new QAction(MainWindow);
         actionSave_as_xyz_file->setObjectName(QStringLiteral("actionSave_as_xyz_file"));
+        actionOpen_xyz_File = new QAction(MainWindow);
+        actionOpen_xyz_File->setObjectName(QStringLiteral("actionOpen_xyz_File"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
@@ -568,6 +571,8 @@ public:
         menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionOpen_DICOM_Image);
         menuFile->addSeparator();
+        menuFile->addAction(actionOpen_xyz_File);
+        menuFile->addSeparator();
         menuFile->addAction(actionOpen_DICOM_Folder);
         menuFile->addSeparator();
         menuFile->addAction(actionSave);
@@ -587,7 +592,7 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -623,6 +628,7 @@ public:
         actionAbout_3DF2D->setText(QApplication::translate("MainWindow", "About 3DF2D...", Q_NULLPTR));
         actionContact_Author->setText(QApplication::translate("MainWindow", "Contact Author", Q_NULLPTR));
         actionSave_as_xyz_file->setText(QApplication::translate("MainWindow", "Save as xyz file", Q_NULLPTR));
+        actionOpen_xyz_File->setText(QApplication::translate("MainWindow", "Open XYZ File", Q_NULLPTR));
         _2D_InformationBox->setTitle(QApplication::translate("MainWindow", "DICOM Informations", Q_NULLPTR));
         _2D_Information_Location->setText(QApplication::translate("MainWindow", "Location", Q_NULLPTR));
         _2D_Information_Location_out->setPlaceholderText(QApplication::translate("MainWindow", "     unknow", Q_NULLPTR));

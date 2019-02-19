@@ -128,6 +128,8 @@ private slots:
 
     void on_actionSave_as_xyz_file_triggered();
 
+    void on_actionOpen_xyz_File_triggered();
+
 private:
     Ui::MainWindow *ui;
     vtkSmartPointer<vtkDICOMImageReader> readerDCMSeries;
@@ -147,6 +149,8 @@ private:
     vtkSmartPointer<vtkVolume> volume3D;
     vtkSmartPointer<vtkFixedPointVolumeRayCastMapper> fixedPointVolumeRaycaster;
     vtkSmartPointer<vtkVolumeTextureMapper3D> volumeTextureMapper;
+    vtkSmartPointer<vtkSimplePointsReader> simplePointReader;
+    vtkSmartPointer<vtkImageData> imageData ;
     int algorithm = 0;
     int mMinSliderX = -1;
     int mMaxSliderX = -1;
@@ -198,11 +202,6 @@ private:
     int* resultDims;
     int   numberOfAddedPoint = 0;
     QHash<int,double> dataArray;
-    vtkSmartPointer<vtkImageData> imageData ;
-    vtkSmartPointer<vtkSimplePointsWriter> xyzWriter = vtkSmartPointer<vtkSimplePointsWriter>::New();
-    vtkSmartPointer<vtkImageViewer2> imageViewerDCMSeries = vtkSmartPointer<vtkImageViewer2>::New();
-    vtkSmartPointer<vtkImageDataGeometryFilter> imageFilter = vtkSmartPointer<vtkImageDataGeometryFilter>::New();
-    vtkSmartPointer<vtkDelaunay3D> delaunay3D = vtkSmartPointer<vtkDelaunay3D>::New();
     enum startPosition { left = 0, right = 1};
 
 };

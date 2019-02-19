@@ -298,6 +298,7 @@ public:
         _P1_Value = new QSpinBox(groupBox);
         _P1_Value->setObjectName(QStringLiteral("_P1_Value"));
         _P1_Value->setGeometry(QRect(140, 20, 61, 22));
+        _P1_Value->setMinimum(-10000);
         _P1_Value->setMaximum(10000);
         _P1_Value->setSingleStep(50);
         label_6 = new QLabel(groupBox);

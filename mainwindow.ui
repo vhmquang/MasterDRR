@@ -42,7 +42,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="tabBarAutoHide">
        <bool>false</bool>
@@ -1055,6 +1055,8 @@
     </property>
     <addaction name="actionOpen_DICOM_Image"/>
     <addaction name="separator"/>
+    <addaction name="actionOpen_xyz_File"/>
+    <addaction name="separator"/>
     <addaction name="actionOpen_DICOM_Folder"/>
     <addaction name="separator"/>
     <addaction name="actionSave"/>
@@ -1174,6 +1176,11 @@
   <action name="actionSave_as_xyz_file">
    <property name="text">
     <string>Save as xyz file</string>
+   </property>
+  </action>
+  <action name="actionOpen_xyz_File">
+   <property name="text">
+    <string>Open XYZ File</string>
    </property>
   </action>
  </widget>

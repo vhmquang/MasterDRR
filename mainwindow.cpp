@@ -959,29 +959,14 @@ void MainWindow::initialize(){
     readerDCMSeries = vtkSmartPointer<vtkDICOMImageReader>::New();
     imageViewerDCMSeriesX = vtkSmartPointer<vtkImageViewer2>::New();
     imageData = vtkSmartPointer<vtkImageData>::New();
+    simplePointReader = vtkSmartPointer<vtkSimplePointsReader>::New();
+    mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+    actor = vtkSmartPointer<vtkActor>::New();
+    renderer = vtkSmartPointer<vtkRenderer>::New();
     // volume = vtkSmartPointer<vtkImageData>::New();
 
 }
-/* old code
- * void MainWindow::restart(){
-    rayCastFunction->Delete();
-    volumeMapper->Delete();
-    mMaxSliderX=0;
-    volumeColor->Delete();
-    volumeScalarOpacity->Delete();
-    volumeGradientOpacity->Delete();
-    volumeProperty->Delete();
-    volumeRaycaster->Delete();
-    readerDCMSeries->Delete();
-    imageViewerDCMSeriesX->Delete();
-    volume->Delete();
-    surface->Delete();
-    renderer->Delete();
-    mapper->Delete();
-    actor->Delete();
-    fixedPointVolumeRaycaster->Delete();
-}
-*/
+
 void MainWindow::defaultCamera(){ //set the default position to make the 2D image viewable after interaction
     imageViewerDCMSeriesX->GetRenderer()->GetActiveCamera()->SetPosition(x,y,z);
     imageViewerDCMSeriesX->GetRenderer()->GetActiveCamera()->SetViewUp(0,1,0);
@@ -1016,10 +1001,7 @@ void MainWindow::initialize3D(){
     volume3D = vtkSmartPointer<vtkVolume>::New();
     volumeTextureMapper = vtkSmartPointer<vtkVolumeTextureMapper3D>::New();
     surface = vtkSmartPointer<vtkMarchingCubes>::New();
-    mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    actor = vtkSmartPointer<vtkActor>::New();
     fixedPointVolumeRaycaster = vtkSmartPointer<vtkFixedPointVolumeRayCastMapper>::New();
-    renderer = vtkSmartPointer<vtkRenderer>::New();
 }
 
 void MainWindow::on__3D_Model_Generate_clicked()
@@ -1334,11 +1316,11 @@ void MainWindow::on_actionSave_as_xyz_file_triggered()
 {
     qDebug() << "Start saving";
     int width = *imageDims;
-     qDebug() << width;
+    qDebug() << width;
     int height = *(imageDims +1);
     int depth = *(imageDims+2);
     double* imageSpacing = imageData->GetSpacing();
-     qDebug() << imageSpacing;
+    qDebug() << imageSpacing;
     double xSpacing = *imageSpacing;
     double ySpacing = *(imageSpacing +1);
     double zSpacing = *(imageSpacing +2);
@@ -1442,6 +1424,37 @@ void MainWindow::printXYZfile(QString filename, QVector<QVector<int> > data, int
                 delete []location;
             }
             count++;
+        }
+    }
+}
+
+void MainWindow::on_actionOpen_xyz_File_triggered()
+{
+    file->setParent(this);
+    file->setFileMode(QFileDialog::ExistingFile);
+    if (file->exec()){
+        QStringList fileNameDCM = file->selectedFiles();
+        std::string stdstrFileNameDCM = fileNameDCM.at(0).toUtf8().constData();
+        initialize();
+        try{
+            this->ui->Image3D->setDisabled(false); //enable 3D tab
+            simplePointReader->SetFileName(stdstrFileNameDCM.c_str());
+            simplePointReader->Update();
+            mapper->SetInputConnection(simplePointReader->GetOutputPort()); //get dataset to viewer
+            actor->SetMapper(mapper);
+            actor->GetProperty()->SetPointSize(1);
+            renderer->AddActor(actor);
+            ui->_3D_Model_Renderer->GetRenderWindow()->AddRenderer(renderer);
+            ui->_3D_Model_Renderer->GetRenderWindow()->Render();
+
+        }
+        catch (int err){ //catch error if there are no DICOM files
+            if (err <=0){
+                this->ui->Image3D->setEnabled(true);
+                QMessageBox::critical(this, "DRR",
+                                      "Folder you open does not contain any DICOM images, please retry .",
+                                      QMessageBox::Ok);
+            }
         }
     }
 }
