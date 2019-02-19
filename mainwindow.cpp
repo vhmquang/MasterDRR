@@ -1458,3 +1458,8 @@ void MainWindow::on_actionOpen_xyz_File_triggered()
         }
     }
 }
+
+void MainWindow::on_actionBall_Pivot_triggered()
+{
+    ballPivot->exec();
+}

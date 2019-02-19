@@ -1074,6 +1074,8 @@
     <addaction name="actionRay_Casting_Settings"/>
     <addaction name="separator"/>
     <addaction name="actionTexture_Mapper"/>
+    <addaction name="separator"/>
+    <addaction name="actionBall_Pivot"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -1181,6 +1183,11 @@
   <action name="actionOpen_xyz_File">
    <property name="text">
     <string>Open XYZ File</string>
+   </property>
+  </action>
+  <action name="actionBall_Pivot">
+   <property name="text">
+    <string>Ball Pivot </string>
    </property>
   </action>
  </widget>

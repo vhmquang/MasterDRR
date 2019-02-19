@@ -32,6 +32,7 @@
 #include <marchingcubes.h>
 #include <raycaster.h>
 #include <texturemapper.h>
+#include <ballpivot.h>
 
 #include <vtkSimplePointsWriter.h>
 #include <vtkImageDataGeometryFilter.h>
@@ -130,6 +131,8 @@ private slots:
 
     void on_actionOpen_xyz_File_triggered();
 
+    void on_actionBall_Pivot_triggered();
+
 private:
     Ui::MainWindow *ui;
     vtkSmartPointer<vtkDICOMImageReader> readerDCMSeries;
@@ -168,6 +171,7 @@ private:
     QString lastUsedDir;
     QFileDialog *dir = new QFileDialog(this);
     QFileDialog *file = new QFileDialog(this);
+    ballpivot *ballPivot = new ballpivot(this);
     Raycaster *rayCasterSettings = new Raycaster(this);
     ScreenShot screenShot;
     marchingcubes *marchingCubesSettings = new marchingcubes(this);

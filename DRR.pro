@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     marchingcubes.cpp \
     texturemapper.cpp \
     linefunction.cpp \
-    plylib.cpp
+    plylib.cpp \
+    ballpivot.cpp
 
 HEADERS  += mainwindow.h \
     screenshot.h \
@@ -29,12 +30,14 @@ HEADERS  += mainwindow.h \
     texturemapper.h \
     linefunction.h \
     importxyz.h \
-    mesh_type.h
+    mesh_type.h \
+    ballpivot.h
 
 FORMS    += mainwindow.ui \
     raycaster.ui \
     marchingcubes.ui \
-    texturemapper.ui
+    texturemapper.ui \
+    ballpivot.ui
 INCLUDEPATH += $$PWD/VTK/include/vtk-6.3
 DEPENDPATH += $$PWD/VTK/lib
 LIBS += "-L$$PWD/VTK/lib"

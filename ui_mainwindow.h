@@ -48,6 +48,7 @@ public:
     QAction *actionContact_Author;
     QAction *actionSave_as_xyz_file;
     QAction *actionOpen_xyz_File;
+    QAction *actionBall_Pivot;
     QWidget *centralWidget;
     QGridLayout *gridLayout_3;
     QTabWidget *tabWidget;
@@ -134,6 +135,8 @@ public:
         actionSave_as_xyz_file->setObjectName(QStringLiteral("actionSave_as_xyz_file"));
         actionOpen_xyz_File = new QAction(MainWindow);
         actionOpen_xyz_File->setObjectName(QStringLiteral("actionOpen_xyz_File"));
+        actionBall_Pivot = new QAction(MainWindow);
+        actionBall_Pivot->setObjectName(QStringLiteral("actionBall_Pivot"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
@@ -585,6 +588,8 @@ public:
         menuAlgorithm->addAction(actionRay_Casting_Settings);
         menuAlgorithm->addSeparator();
         menuAlgorithm->addAction(actionTexture_Mapper);
+        menuAlgorithm->addSeparator();
+        menuAlgorithm->addAction(actionBall_Pivot);
         menuHelp->addAction(actionAbout_3DF2D);
         menuHelp->addSeparator();
         menuHelp->addAction(actionContact_Author);
@@ -629,6 +634,7 @@ public:
         actionContact_Author->setText(QApplication::translate("MainWindow", "Contact Author", Q_NULLPTR));
         actionSave_as_xyz_file->setText(QApplication::translate("MainWindow", "Save as xyz file", Q_NULLPTR));
         actionOpen_xyz_File->setText(QApplication::translate("MainWindow", "Open XYZ File", Q_NULLPTR));
+        actionBall_Pivot->setText(QApplication::translate("MainWindow", "Ball Pivot ", Q_NULLPTR));
         _2D_InformationBox->setTitle(QApplication::translate("MainWindow", "DICOM Informations", Q_NULLPTR));
         _2D_Information_Location->setText(QApplication::translate("MainWindow", "Location", Q_NULLPTR));
         _2D_Information_Location_out->setPlaceholderText(QApplication::translate("MainWindow", "     unknow", Q_NULLPTR));

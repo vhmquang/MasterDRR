@@ -53,11 +53,13 @@ SOURCES       = main.cpp \
 		marchingcubes.cpp \
 		texturemapper.cpp \
 		linefunction.cpp \
-		plylib.cpp debug\moc_mainwindow.cpp \
+		plylib.cpp \
+		ballpivot.cpp debug\moc_mainwindow.cpp \
 		debug\moc_screenshot.cpp \
 		debug\moc_raycaster.cpp \
 		debug\moc_marchingcubes.cpp \
-		debug\moc_texturemapper.cpp
+		debug\moc_texturemapper.cpp \
+		debug\moc_ballpivot.cpp
 OBJECTS       = debug\main.obj \
 		debug\mainwindow.obj \
 		debug\screenshot.obj \
@@ -66,11 +68,13 @@ OBJECTS       = debug\main.obj \
 		debug\texturemapper.obj \
 		debug\linefunction.obj \
 		debug\plylib.obj \
+		debug\ballpivot.obj \
 		debug\moc_mainwindow.obj \
 		debug\moc_screenshot.obj \
 		debug\moc_raycaster.obj \
 		debug\moc_marchingcubes.obj \
-		debug\moc_texturemapper.obj
+		debug\moc_texturemapper.obj \
+		debug\moc_ballpivot.obj
 
 DIST          =  mainwindow.h \
 		screenshot.h \
@@ -79,14 +83,16 @@ DIST          =  mainwindow.h \
 		texturemapper.h \
 		linefunction.h \
 		importxyz.h \
-		mesh_type.h main.cpp \
+		mesh_type.h \
+		ballpivot.h main.cpp \
 		mainwindow.cpp \
 		screenshot.cpp \
 		raycaster.cpp \
 		marchingcubes.cpp \
 		texturemapper.cpp \
 		linefunction.cpp \
-		plylib.cpp
+		plylib.cpp \
+		ballpivot.cpp
 QMAKE_TARGET  = DRR
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = DRR.exe
@@ -141,9 +147,9 @@ DESTDIR_TARGET = debug\DRR.exe
 first: all
 all: Makefile.Debug  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): ui_mainwindow.h ui_raycaster.h ui_marchingcubes.h ui_texturemapper.h $(OBJECTS) 
+$(DESTDIR_TARGET): ui_mainwindow.h ui_raycaster.h ui_marchingcubes.h ui_texturemapper.h ui_ballpivot.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
-debug\main.obj debug\mainwindow.obj debug\screenshot.obj debug\raycaster.obj debug\marchingcubes.obj debug\texturemapper.obj debug\linefunction.obj debug\plylib.obj debug\moc_mainwindow.obj debug\moc_screenshot.obj debug\moc_raycaster.obj debug\moc_marchingcubes.obj debug\moc_texturemapper.obj
+debug\main.obj debug\mainwindow.obj debug\screenshot.obj debug\raycaster.obj debug\marchingcubes.obj debug\texturemapper.obj debug\linefunction.obj debug\plylib.obj debug\ballpivot.obj debug\moc_mainwindow.obj debug\moc_screenshot.obj debug\moc_raycaster.obj debug\moc_marchingcubes.obj debug\moc_texturemapper.obj debug\moc_ballpivot.obj
 $(LIBS)
 <<
 
@@ -153,10 +159,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) DRR.zip $(SOURCES) $(DIST) DRR.pro ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\spec_pre.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\common\angle.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\common\msvc-desktop.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\qconfig.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3danimation.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dcore.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dextras.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dinput.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dlogic.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquick.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3drender.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3drender_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axbase.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axbase_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axcontainer.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axserver.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axserver_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_bluetooth.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_charts.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_charts_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_core.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_core_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_datavisualization.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_datavisualization_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_dbus.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_designer.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gamepad.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gui.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_help.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_help_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_location.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_location_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_network.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_network_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_networkauth.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_networkauth_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_nfc.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_nfc_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_opengl.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_openglextensions.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_positioning.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_positioning_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qml.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quick.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_repparser.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_repparser_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_script.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_script_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scripttools.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scxml.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scxml_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sensors.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sensors_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialbus.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialport.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialport_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sql.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_svg.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_testlib.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_uitools.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webchannel.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webengine.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webengine_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginecore.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginecore_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_websockets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_websockets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webview.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webview_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_widgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_winextras.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_winextras_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xml.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qt_functions.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qt_config.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\win32-msvc\qmake.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\exclusive_builds.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\common\msvc-version.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\toolchain.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\default_pre.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\win32\default_pre.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\resolve_config.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\exclusive_builds_post.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\default_post.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\build_pass.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\precompile_header.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\warn_on.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qt.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\resources.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\moc.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\win32\opengl.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\uic.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qmake_use.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\file_copies.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\win32\windows.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\testcase_targets.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\exceptions.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\yacc.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\lex.prf DRR.pro ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\qtmaind.prl ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\Qt5Widgetsd.prl ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\Qt5Guid.prl ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\Qt5Cored.prl    ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\data\dummy.cpp mainwindow.h screenshot.h raycaster.h marchingcubes.h texturemapper.h linefunction.h importxyz.h mesh_type.h main.cpp mainwindow.cpp screenshot.cpp raycaster.cpp marchingcubes.cpp texturemapper.cpp linefunction.cpp plylib.cpp mainwindow.ui raycaster.ui marchingcubes.ui texturemapper.ui    
+	$(ZIP) DRR.zip $(SOURCES) $(DIST) DRR.pro ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\spec_pre.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\common\angle.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\common\msvc-desktop.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\qconfig.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3danimation.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dcore.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dextras.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dinput.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dlogic.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquick.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3drender.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_3drender_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axbase.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axbase_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axcontainer.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axserver.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_axserver_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_bluetooth.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_charts.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_charts_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_core.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_core_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_datavisualization.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_datavisualization_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_dbus.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_designer.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gamepad.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gui.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_help.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_help_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_location.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_location_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_network.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_network_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_networkauth.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_networkauth_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_nfc.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_nfc_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_opengl.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_openglextensions.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_positioning.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_positioning_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qml.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quick.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_repparser.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_repparser_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_script.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_script_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scripttools.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scxml.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_scxml_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sensors.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sensors_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialbus.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialport.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_serialport_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sql.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_svg.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_testlib.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_uitools.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webchannel.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webengine.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webengine_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginecore.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginecore_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_websockets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_websockets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webview.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_webview_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_widgets.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_winextras.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_winextras_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xml.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qt_functions.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qt_config.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\win32-msvc\qmake.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\exclusive_builds.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\common\msvc-version.conf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\toolchain.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\default_pre.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\win32\default_pre.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\resolve_config.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\exclusive_builds_post.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\default_post.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\build_pass.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\precompile_header.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\warn_on.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qt.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\resources.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\moc.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\win32\opengl.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\uic.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\qmake_use.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\file_copies.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\win32\windows.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\testcase_targets.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\exceptions.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\yacc.prf ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\lex.prf DRR.pro ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\qtmaind.prl ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\Qt5Widgetsd.prl ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\Qt5Guid.prl ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\lib\Qt5Cored.prl    ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\data\dummy.cpp mainwindow.h screenshot.h raycaster.h marchingcubes.h texturemapper.h linefunction.h importxyz.h mesh_type.h ballpivot.h main.cpp mainwindow.cpp screenshot.cpp raycaster.cpp marchingcubes.cpp texturemapper.cpp linefunction.cpp plylib.cpp ballpivot.cpp mainwindow.ui raycaster.ui marchingcubes.ui texturemapper.ui ballpivot.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.obj debug\mainwindow.obj debug\screenshot.obj debug\raycaster.obj debug\marchingcubes.obj debug\texturemapper.obj debug\linefunction.obj debug\plylib.obj debug\moc_mainwindow.obj debug\moc_screenshot.obj debug\moc_raycaster.obj debug\moc_marchingcubes.obj debug\moc_texturemapper.obj
+	-$(DEL_FILE) debug\main.obj debug\mainwindow.obj debug\screenshot.obj debug\raycaster.obj debug\marchingcubes.obj debug\texturemapper.obj debug\linefunction.obj debug\plylib.obj debug\ballpivot.obj debug\moc_mainwindow.obj debug\moc_screenshot.obj debug\moc_raycaster.obj debug\moc_marchingcubes.obj debug\moc_texturemapper.obj debug\moc_ballpivot.obj
 	-$(DEL_FILE) debug\DRR.exp debug\DRR.vc.pdb debug\DRR.ilk debug\DRR.idb
 
 distclean: clean 
@@ -182,9 +188,9 @@ compiler_moc_predefs_clean:
 debug\moc_predefs.h: ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\data\dummy.cpp
 	cl -BxD:\Qt\Qt5.9.0\5.9\msvc2015_64\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zi -MDd -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E -Za ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\mkspecs\features\data\dummy.cpp 2>NUL >debug\moc_predefs.h
 
-compiler_moc_header_make_all: debug\moc_mainwindow.cpp debug\moc_screenshot.cpp debug\moc_raycaster.cpp debug\moc_marchingcubes.cpp debug\moc_texturemapper.cpp
+compiler_moc_header_make_all: debug\moc_mainwindow.cpp debug\moc_screenshot.cpp debug\moc_raycaster.cpp debug\moc_marchingcubes.cpp debug\moc_texturemapper.cpp debug\moc_ballpivot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_mainwindow.cpp debug\moc_screenshot.cpp debug\moc_raycaster.cpp debug\moc_marchingcubes.cpp debug\moc_texturemapper.cpp
+	-$(DEL_FILE) debug\moc_mainwindow.cpp debug\moc_screenshot.cpp debug\moc_raycaster.cpp debug\moc_marchingcubes.cpp debug\moc_texturemapper.cpp debug\moc_ballpivot.cpp
 debug\moc_mainwindow.cpp: ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QMainWindow \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qmainwindow.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
@@ -440,6 +446,7 @@ debug\moc_mainwindow.cpp: ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QMa
 		raycaster.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QString \
 		texturemapper.h \
+		ballpivot.h \
 		VTK\include\vtk-6.3\vtkSimplePointsWriter.h \
 		VTK\include\vtk-6.3\vtkIOLegacyModule.h \
 		VTK\include\vtk-6.3\vtkDataSetWriter.h \
@@ -951,11 +958,117 @@ debug\moc_texturemapper.cpp: ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\bin\moc.exe
 	D:\Qt\Qt5.9.0\5.9\msvc2015_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/mkspecs/win32-msvc -ID:/Master/MasterDRR -ID:/Master/MasterDRR/VTK/include/vtk-6.3 -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtWidgets -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtGui -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtANGLE -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"D:\Windows Kits\10\include\10.0.17134.0\ucrt" -I"D:\Windows Kits\10\include\10.0.17134.0\shared" -I"D:\Windows Kits\10\include\10.0.17134.0\um" -I"D:\Windows Kits\10\include\10.0.17134.0\winrt" -I"D:\Windows Kits\10\include\10.0.17134.0\cppwinrt" texturemapper.h -o debug\moc_texturemapper.cpp
 
+debug\moc_ballpivot.cpp: ..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialog \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialog.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtguiglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qconfig.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtcore-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsystemdetection.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qprocessordetection.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcompilerdetection.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtypeinfo.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsysinfo.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlogging.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qflags.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbasicatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_bootstrap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qgenericatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_cxx11.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_msvc.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobalstatic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmutex.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnumeric.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qversiontagging.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtgui-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnamespace.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs_win.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstring.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qchar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbytearray.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qrefcount.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qarraydata.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringbuilder.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlist.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qalgorithms.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qiterator.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhashfunctions.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qpair.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbytearraylist.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringlist.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregexp.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringmatcher.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreevent.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qscopedpointer.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmetatype.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvarlengtharray.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontainerfwd.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmargins.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpaintdevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qrect.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsize.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qpoint.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpalette.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qcolor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrgb.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrgba64.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qbrush.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvector.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qmatrix.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpolygon.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qregion.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdatastream.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qiodevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qline.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtransform.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpainterpath.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qimage.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpixelformat.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpixmap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qshareddata.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhash.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfont.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontmetrics.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontinfo.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qsizepolicy.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qcursor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qkeysequence.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qevent.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvariant.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdebug.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtextstream.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlocale.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qset.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontiguouscache.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qurl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qurlquery.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfile.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfiledevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvector2d.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtouchdevice.h \
+		ballpivot.h \
+		debug\moc_predefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\bin\moc.exe
+	D:\Qt\Qt5.9.0\5.9\msvc2015_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/mkspecs/win32-msvc -ID:/Master/MasterDRR -ID:/Master/MasterDRR/VTK/include/vtk-6.3 -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtWidgets -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtGui -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtANGLE -ID:/Qt/Qt5.9.0/5.9/msvc2015_64/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"D:\Windows Kits\10\include\10.0.17134.0\ucrt" -I"D:\Windows Kits\10\include\10.0.17134.0\shared" -I"D:\Windows Kits\10\include\10.0.17134.0\um" -I"D:\Windows Kits\10\include\10.0.17134.0\winrt" -I"D:\Windows Kits\10\include\10.0.17134.0\cppwinrt" ballpivot.h -o debug\moc_ballpivot.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_raycaster.h ui_marchingcubes.h ui_texturemapper.h
+compiler_uic_make_all: ui_mainwindow.h ui_raycaster.h ui_marchingcubes.h ui_texturemapper.h ui_ballpivot.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_raycaster.h ui_marchingcubes.h ui_texturemapper.h
+	-$(DEL_FILE) ui_mainwindow.h ui_raycaster.h ui_marchingcubes.h ui_texturemapper.h ui_ballpivot.h
 ui_mainwindow.h: mainwindow.ui \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\bin\uic.exe \
 		VTK\include\vtk-6.3\QVTKWidget.h \
@@ -1106,6 +1219,10 @@ ui_marchingcubes.h: marchingcubes.ui \
 ui_texturemapper.h: texturemapper.ui \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\bin\uic.exe
 	D:\Qt\Qt5.9.0\5.9\msvc2015_64\bin\uic.exe texturemapper.ui -o ui_texturemapper.h
+
+ui_ballpivot.h: ballpivot.ui \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\bin\uic.exe
+	D:\Qt\Qt5.9.0\5.9\msvc2015_64\bin\uic.exe ballpivot.ui -o ui_ballpivot.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -1375,6 +1492,7 @@ debug\main.obj: main.cpp mainwindow.h \
 		raycaster.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QString \
 		texturemapper.h \
+		ballpivot.h \
 		VTK\include\vtk-6.3\vtkSimplePointsWriter.h \
 		VTK\include\vtk-6.3\vtkIOLegacyModule.h \
 		VTK\include\vtk-6.3\vtkDataSetWriter.h \
@@ -1680,6 +1798,7 @@ debug\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		raycaster.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QString \
 		texturemapper.h \
+		ballpivot.h \
 		VTK\include\vtk-6.3\vtkSimplePointsWriter.h \
 		VTK\include\vtk-6.3\vtkIOLegacyModule.h \
 		VTK\include\vtk-6.3\vtkDataSetWriter.h \
@@ -1722,6 +1841,73 @@ debug\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		linefunction.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QHash \
 		ui_mainwindow.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QVariant \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QAction \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qeventloop.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QGridLayout \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qgridlayout.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlayout.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlayoutitem.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qboxlayout.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QGroupBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qgroupbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qframe.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvalidator.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregularexpression.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyle.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabbar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qrubberband.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QLineEdit \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlineedit.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpen.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QMenu \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qmenu.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QMenuBar \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qmenubar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QPlainTextEdit \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qplaintextedit.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtextedit.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextdocument.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qabstracttextdocumentlayout.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextlayout.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qglyphrun.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrawfont.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontdatabase.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QPushButton \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qpushbutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSlider \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSpinBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QStatusBar \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstatusbar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QTabWidget \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QToolButton \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtoolbutton.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QMessageBox \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qmessagebox.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QEvent \
@@ -1736,8 +1922,6 @@ debug\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QtCoreDepends \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractanimation.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstracteventdispatcher.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qeventloop.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractitemmodel.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractnativeeventfilter.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractproxymodel.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractstate.h \
@@ -1753,7 +1937,6 @@ debug\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcollator.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcommandlineoption.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcommandlineparser.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreapplication.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcryptographichash.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdatetime.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdeadlinetimer.h \
@@ -1776,7 +1959,6 @@ debug\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhistorystate.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qidentityproxymodel.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qisenum.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qitemselectionmodel.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qjsonarray.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qjsonvalue.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qjsondocument.h \
@@ -1805,7 +1987,6 @@ debug\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvariantanimation.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qqueue.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qreadwritelock.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregularexpression.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qresource.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsavefile.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qscopedvaluerollback.h \
@@ -2030,11 +2211,9 @@ debug\screenshot.obj: screenshot.cpp screenshot.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialog.h
 
 debug\raycaster.obj: raycaster.cpp ui_raycaster.h \
-		raycaster.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialog \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialog.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtguiglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QVariant \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvariant.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobal.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qconfig.h \
@@ -2046,30 +2225,21 @@ debug\raycaster.obj: raycaster.cpp ui_raycaster.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsysinfo.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlogging.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qflags.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobalstatic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmutex.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnumeric.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qversiontagging.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbasicatomic.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_bootstrap.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qgenericatomic.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_cxx11.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_msvc.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobalstatic.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmutex.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnumeric.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qversiontagging.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtgui-config.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qwidget.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnamespace.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs_win.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstring.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qchar.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbytearray.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qrefcount.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnamespace.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qarraydata.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstring.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qchar.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringbuilder.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlist.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qalgorithms.h \
@@ -2080,58 +2250,120 @@ debug\raycaster.obj: raycaster.cpp ui_raycaster.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringlist.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregexp.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringmatcher.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreevent.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qscopedpointer.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmetatype.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvarlengtharray.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontainerfwd.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdebug.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhash.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtextstream.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qiodevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreevent.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qscopedpointer.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlocale.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qshareddata.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvector.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qpoint.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qset.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontiguouscache.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QAction \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtguiglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtgui-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qkeysequence.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs_win.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmargins.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpaintdevice.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qrect.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsize.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qpoint.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpalette.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qcolor.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrgb.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrgba64.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qbrush.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvector.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qmatrix.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpolygon.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qregion.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdatastream.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qiodevice.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qline.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtransform.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpainterpath.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qimage.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpixelformat.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpixmap.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qshareddata.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhash.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer_impl.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfont.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontmetrics.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontinfo.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qsizepolicy.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qcursor.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qkeysequence.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qevent.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvariant.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmap.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdebug.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtextstream.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlocale.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qset.h \
-		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontiguouscache.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qurl.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qurlquery.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfile.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfiledevice.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvector2d.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtouchdevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qicon.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qeventloop.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialog \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialog.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialogButtonBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDoubleSpinBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvalidator.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregularexpression.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QGroupBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qgroupbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qframe.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyle.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabbar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qrubberband.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QLineEdit \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlineedit.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpen.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QRadioButton \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qradiobutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSlider \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSpinBox \
+		raycaster.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QWidget \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QString
 
@@ -2238,7 +2470,52 @@ debug\marchingcubes.obj: marchingcubes.cpp marchingcubes.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvector2d.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtouchdevice.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QStringList \
-		ui_marchingcubes.h
+		ui_marchingcubes.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QVariant \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QAction \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qicon.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qeventloop.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QCheckBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qcheckbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialogButtonBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QGroupBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qgroupbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qframe.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvalidator.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregularexpression.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyle.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabbar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qrubberband.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QRadioButton \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qradiobutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSpinBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qspinbox.h
 
 debug\texturemapper.obj: texturemapper.cpp texturemapper.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialog \
@@ -2342,11 +2619,166 @@ debug\texturemapper.obj: texturemapper.cpp texturemapper.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfiledevice.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvector2d.h \
 		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtouchdevice.h \
-		ui_texturemapper.h
+		ui_texturemapper.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\QVariant \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QAction \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qicon.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qeventloop.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QCheckBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qcheckbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialogButtonBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDoubleSpinBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvalidator.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregularexpression.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QGroupBox \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qgroupbox.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qframe.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qstyle.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabbar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qrubberband.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QLineEdit \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qlineedit.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpen.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSlider \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QSpinBox
 
 debug\linefunction.obj: linefunction.cpp linefunction.h
 
-debug\plylib.obj: plylib.cpp 
+debug\plylib.obj: plylib.cpp wrap\ply\plylib.h
+
+debug\ballpivot.obj: ballpivot.cpp ballpivot.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\QDialog \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qdialog.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtguiglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobal.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qconfig.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtcore-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsystemdetection.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qprocessordetection.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcompilerdetection.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtypeinfo.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsysinfo.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlogging.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qflags.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbasicatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_bootstrap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qgenericatomic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_cxx11.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qatomic_msvc.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qglobalstatic.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmutex.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnumeric.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qversiontagging.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtgui-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qwidget.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qnamespace.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qwindowdefs_win.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstring.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qchar.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbytearray.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qrefcount.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qarraydata.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringbuilder.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlist.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qalgorithms.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qiterator.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhashfunctions.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qpair.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qbytearraylist.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringlist.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qregexp.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qstringmatcher.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcoreevent.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qscopedpointer.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmetatype.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvarlengtharray.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontainerfwd.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qobject_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmargins.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpaintdevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qrect.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsize.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qpoint.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpalette.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qcolor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrgb.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qrgba64.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qbrush.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvector.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qmatrix.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpolygon.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qregion.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdatastream.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qiodevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qline.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtransform.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpainterpath.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qimage.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpixelformat.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qpixmap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qshareddata.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qhash.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfont.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontmetrics.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qfontinfo.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtWidgets\qsizepolicy.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qcursor.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qkeysequence.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qevent.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qvariant.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qmap.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qdebug.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qtextstream.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qlocale.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qset.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qcontiguouscache.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qurl.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qurlquery.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfile.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtCore\qfiledevice.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qvector2d.h \
+		..\..\Qt\Qt5.9.0\5.9\msvc2015_64\include\QtGui\qtouchdevice.h \
+		ui_ballpivot.h
 
 debug\moc_mainwindow.obj: debug\moc_mainwindow.cpp 
 
@@ -2357,6 +2789,8 @@ debug\moc_raycaster.obj: debug\moc_raycaster.cpp
 debug\moc_marchingcubes.obj: debug\moc_marchingcubes.cpp 
 
 debug\moc_texturemapper.obj: debug\moc_texturemapper.cpp 
+
+debug\moc_ballpivot.obj: debug\moc_ballpivot.cpp 
 
 ####### Install
 
