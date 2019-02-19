@@ -963,6 +963,7 @@ void MainWindow::initialize(){
     mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
     actor = vtkSmartPointer<vtkActor>::New();
     renderer = vtkSmartPointer<vtkRenderer>::New();
+    PLYReader = vtkSmartPointer<vtkPLYReader>::New();
     // volume = vtkSmartPointer<vtkImageData>::New();
 
 }
@@ -1015,7 +1016,7 @@ void MainWindow::on__3D_Model_Generate_clicked()
                               QMessageBox::Ok);
     }
     else {
-        if (algorithm ==0){
+        if (algorithm ==0){ //Marching Cube
             surface->SetInputData( readerDCMSeries->GetOutput()); //input the volume to Marching cube
             if (marchingCubesSettings->getMarchingCubes()=="value"){ // if use value
                 surface->SetNumberOfContours(4);//set number of contour to 4
@@ -1064,7 +1065,7 @@ void MainWindow::on__3D_Model_Generate_clicked()
             //     ui->_3D_Model_Renderer->GetRenderWindow()->Finalize();
             ui->_3D_Model_Renderer->GetRenderWindow()->Render();
         }
-        else {
+        else if (algorithm == 2) {
             /*  if (volume->GetDataObjectType()==5){ // design which algorithm should be used for each data type
                 volumeMapper->SetInputData(volume);
                 volumeMapper->SetVolumeRayCastFunction(rayCastFunction);
@@ -1099,7 +1100,6 @@ void MainWindow::on__3D_Model_Generate_clicked()
             //   ui->_3D_Model_Renderer->GetRenderWindow()->Finalize();
             ui->_3D_Model_Renderer->GetRenderWindow()->Render();
         }
-
     }
     qDebug() << list->GetNumberOfItems();
     ex = 1;
@@ -1314,6 +1314,8 @@ void MainWindow::on_actionContact_Author_triggered()
 
 void MainWindow::on_actionSave_as_xyz_file_triggered()
 {
+    if (clockWiseTraceSettings->exec)
+    {
     qDebug() << "Start saving";
     int width = *imageDims;
     qDebug() << width;
@@ -1394,6 +1396,7 @@ void MainWindow::on_actionSave_as_xyz_file_triggered()
     printXYZfile("externalBoundaryData.xyz",externalBoundaryVector,resultDims,imageSpacing);
     //qDebug() << fillVector.size();
     //  printSingleXYZfile("fillData.xyz",fillVector,resultDims,imageSpacing);
+    }
 }
 void MainWindow::printXYZfile(QString filename, QVector<QVector<int> > data, int *dims, double *spacing){
     QString filename1 = filename;
@@ -1446,7 +1449,7 @@ void MainWindow::on_actionOpen_xyz_File_triggered()
             renderer->AddActor(actor);
             ui->_3D_Model_Renderer->GetRenderWindow()->AddRenderer(renderer);
             ui->_3D_Model_Renderer->GetRenderWindow()->Render();
-
+            ballPivot->setFile(stdstrFileNameDCM);
         }
         catch (int err){ //catch error if there are no DICOM files
             if (err <=0){
@@ -1461,5 +1464,18 @@ void MainWindow::on_actionOpen_xyz_File_triggered()
 
 void MainWindow::on_actionBall_Pivot_triggered()
 {
-    ballPivot->exec();
+    algorithm = 3;
+    if(ballPivot->exec())
+    {
+        ballPivot->buildMesh();
+    }
+    PLYReader->SetFileName("result.ply");
+    qDebug() << "set file name ok";
+    PLYReader->Update();
+    mapper->SetInputConnection(PLYReader->GetOutputPort()); //get dataset to viewer
+    actor->SetMapper(mapper);
+    renderer->AddActor(actor);
+    qDebug() << "set mapper + actor  ok";
+    ui->_3D_Model_Renderer->GetRenderWindow()->AddRenderer(renderer);
+    ui->_3D_Model_Renderer->GetRenderWindow()->Render();
 }

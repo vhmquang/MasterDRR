@@ -57,9 +57,11 @@ public:
         cluster = new QDoubleSpinBox(ballpivot);
         cluster->setObjectName(QStringLiteral("cluster"));
         cluster->setGeometry(QRect(200, 50, 101, 22));
+        cluster->setValue(20);
         angle = new QDoubleSpinBox(ballpivot);
         angle->setObjectName(QStringLiteral("angle"));
         angle->setGeometry(QRect(200, 80, 101, 22));
+        angle->setValue(90);
 
         retranslateUi(ballpivot);
         QObject::connect(buttonBox, SIGNAL(accepted()), ballpivot, SLOT(accept()));

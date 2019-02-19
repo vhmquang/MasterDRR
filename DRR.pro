@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     texturemapper.cpp \
     linefunction.cpp \
     plylib.cpp \
-    ballpivot.cpp
+    ballpivot.cpp \
+    clockwisetrace.cpp
 
 HEADERS  += mainwindow.h \
     screenshot.h \
@@ -31,13 +32,15 @@ HEADERS  += mainwindow.h \
     linefunction.h \
     importxyz.h \
     mesh_type.h \
-    ballpivot.h
+    ballpivot.h \
+    clockwisetrace.h
 
 FORMS    += mainwindow.ui \
     raycaster.ui \
     marchingcubes.ui \
     texturemapper.ui \
-    ballpivot.ui
+    ballpivot.ui \
+    clockwisetrace.ui
 INCLUDEPATH += $$PWD/VTK/include/vtk-6.3
 DEPENDPATH += $$PWD/VTK/lib
 LIBS += "-L$$PWD/VTK/lib"

@@ -23,6 +23,7 @@
 #include <vtkWin32OutputWindow.h>
 #include <vtkFixedPointVolumeRayCastMapper.h>
 #include <vtkVolumeTextureMapper3D.h>
+#include <vtkPLYReader.h>
 #include <vtkAutoInit.h>
 #include <vtkProperty.h>
 #include <vtkLookupTable.h>
@@ -33,6 +34,7 @@
 #include <raycaster.h>
 #include <texturemapper.h>
 #include <ballpivot.h>
+#include <clockwisetrace.h>
 
 #include <vtkSimplePointsWriter.h>
 #include <vtkImageDataGeometryFilter.h>
@@ -154,6 +156,7 @@ private:
     vtkSmartPointer<vtkVolumeTextureMapper3D> volumeTextureMapper;
     vtkSmartPointer<vtkSimplePointsReader> simplePointReader;
     vtkSmartPointer<vtkImageData> imageData ;
+    vtkSmartPointer<vtkPLYReader> PLYReader;
     int algorithm = 0;
     int mMinSliderX = -1;
     int mMaxSliderX = -1;
@@ -172,6 +175,7 @@ private:
     QFileDialog *dir = new QFileDialog(this);
     QFileDialog *file = new QFileDialog(this);
     ballpivot *ballPivot = new ballpivot(this);
+    ClockWiseTrace *clockWiseTraceSettings = new ClockWiseTrace(this);
     Raycaster *rayCasterSettings = new Raycaster(this);
     ScreenShot screenShot;
     marchingcubes *marchingCubesSettings = new marchingcubes(this);
