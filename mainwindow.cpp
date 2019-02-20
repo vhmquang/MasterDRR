@@ -675,7 +675,7 @@ void printSingleXYZfile(QString filename, QVector<int> data, int *dims){
         }
     }
 }
-QVector<int> clockWiseTrace(int z,int* imageDims,vtkSmartPointer<vtkImageData> imageData){
+QVector<int> clockWiseTrace(int z,int* imageDims,vtkSmartPointer<vtkImageData> imageData, ClockWiseTrace *clockWiseSettings){
     bool isRunning = true;
     bool isFirstPoint = true;
     int firstPoint;
@@ -684,13 +684,13 @@ QVector<int> clockWiseTrace(int z,int* imageDims,vtkSmartPointer<vtkImageData> i
     int nextPoint;
     int defaultDistance = 1;
     int distance = defaultDistance;
-    int maxDistance = 5;
+    int maxDistance = clockWiseSettings->maxDistance;
     int countRetry = 0;
-    int numberOfRetry = 3;
-    int requiredPoint = 35;
-    double _lowerBound = 400;
-    double _upperBound = 2500;
-    double _stepBound = 100;
+    int numberOfRetry = clockWiseSettings->retryTimes;
+    int requiredPoint = clockWiseSettings->points;
+    double _lowerBound = clockWiseSettings->lower;
+    double _upperBound = clockWiseSettings->upper;
+    double _stepBound = clockWiseSettings->step;
     QVector<int> _blackListVector;
     QVector<int> _tempVector;
     QHash<int,double> dataArray = extractDICOMData(z,imageDims,imageData);
@@ -1314,7 +1314,7 @@ void MainWindow::on_actionContact_Author_triggered()
 
 void MainWindow::on_actionSave_as_xyz_file_triggered()
 {
-    if (clockWiseTraceSettings->exec)
+    if (clockWiseTraceSettings->exec())
     {
     qDebug() << "Start saving";
     int width = *imageDims;
@@ -1377,7 +1377,7 @@ void MainWindow::on_actionSave_as_xyz_file_triggered()
     QThreadPool::globalInstance()->setMaxThreadCount(3);
     int z;
     for (z = 0; z < resultDims[2]; z++){
-        auto f1 = QtConcurrent::run(QThreadPool::globalInstance(),clockWiseTrace,z,_imageDims,imageData);
+        auto f1 = QtConcurrent::run(QThreadPool::globalInstance(),clockWiseTrace,z,_imageDims,imageData,clockWiseTraceSettings);
         futureSync.addFuture(f1);
         qDebug() << "Number of thread" << QThreadPool::globalInstance()->activeThreadCount();
     }
@@ -1469,11 +1469,17 @@ void MainWindow::on_actionBall_Pivot_triggered()
     {
         ballPivot->buildMesh();
     }
+    vtkSmartPointer<vtkRendererCollection> list = ui->_3D_Model_Renderer->GetRenderWindow()->GetRenderers(); //get number of renderer
+    list->RemoveAllItems(); //remove all renderer to reduce memory
+    PLYReader = vtkSmartPointer<vtkPLYReader>::New();
     PLYReader->SetFileName("result.ply");
     qDebug() << "set file name ok";
     PLYReader->Update();
+    mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
     mapper->SetInputConnection(PLYReader->GetOutputPort()); //get dataset to viewer
+    actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
+    renderer = vtkSmartPointer<vtkRenderer>::New();
     renderer->AddActor(actor);
     qDebug() << "set mapper + actor  ok";
     ui->_3D_Model_Renderer->GetRenderWindow()->AddRenderer(renderer);

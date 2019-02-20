@@ -51,6 +51,12 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maximum">
+    <number>10</number>
+   </property>
+   <property name="value">
+    <number>3</number>
+   </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -126,6 +132,9 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="value">
+    <number>3</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="requiredPoints">
    <property name="geometry">
@@ -135,6 +144,9 @@
      <width>111</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="value">
+    <number>35</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="lower">
@@ -146,6 +158,12 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="value">
+    <number>250</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="upper">
    <property name="geometry">
@@ -156,6 +174,12 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="value">
+    <number>2500</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="steps">
    <property name="geometry">
@@ -165,6 +189,12 @@
      <width>111</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="value">
+    <number>200</number>
    </property>
   </widget>
  </widget>

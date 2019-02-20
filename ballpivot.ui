@@ -87,6 +87,9 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maximum">
+    <double>100.000000000000000</double>
+   </property>
    <property name="value">
     <double>20.000000000000000</double>
    </property>
@@ -99,6 +102,9 @@
      <width>101</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="maximum">
+    <double>360.000000000000000</double>
    </property>
    <property name="value">
     <double>90.000000000000000</double>
