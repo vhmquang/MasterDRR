@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     linefunction.cpp \
     plylib.cpp \
     ballpivot.cpp \
-    clockwisetrace.cpp
+    clockwisetrace.cpp \
+    boundaryextractor.cpp
 
 HEADERS  += mainwindow.h \
     screenshot.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     importxyz.h \
     mesh_type.h \
     ballpivot.h \
-    clockwisetrace.h
+    clockwisetrace.h \
+    boundaryextractor.h
 
 FORMS    += mainwindow.ui \
     raycaster.ui \

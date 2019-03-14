@@ -82,11 +82,13 @@ public:
         lower = new QSpinBox(ClockWiseTrace);
         lower->setObjectName(QStringLiteral("lower"));
         lower->setGeometry(QRect(140, 100, 111, 22));
+        lower->setMinimum(-10000);
         lower->setMaximum(10000);
         lower->setValue(250);
         upper = new QSpinBox(ClockWiseTrace);
         upper->setObjectName(QStringLiteral("upper"));
         upper->setGeometry(QRect(140, 130, 111, 22));
+        upper->setMinimum(-10000);
         upper->setMaximum(10000);
         upper->setValue(2500);
         steps = new QSpinBox(ClockWiseTrace);

@@ -62,6 +62,7 @@
 #include <math.h>
 #include <linefunction.h>
 #include <QHash>
+#include <boundaryextractor.h>
 namespace Ui {
 class MainWindow;
 }
@@ -123,7 +124,7 @@ private slots:
 
     void on_actionContact_Author_triggered();
 
-    double bilinearInterpolation(double q11, double q12, double q21, double q22, double x1, double x2, double y1, double y2, double x, double y);
+   // double bilinearInterpolation(double q11, double q12, double q21, double q22, double x1, double x2, double y1, double y2, double x, double y);
 
     int getOffSet2D(int x, int y, int* dims);
 
@@ -134,7 +135,8 @@ private slots:
     void on_actionOpen_xyz_File_triggered();
 
     void on_actionBall_Pivot_triggered();
-
+signals:
+    void execute();
 private:
     Ui::MainWindow *ui;
     vtkSmartPointer<vtkDICOMImageReader> readerDCMSeries;
